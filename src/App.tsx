@@ -12,7 +12,7 @@ import SocialMediaSection from "./components/SocialMidia/SocialMIdia";
 import ProductCatalog from "./components/Perfumes/ProductCatalog";
 import ProductInfoSection from "./components/ProductInfoSection/ProductInfoSection";
 import AboutLoja from "./components/AboutLoja/AboutLoja";
-import { CartProvider, useCart } from "./components/contexts/CartContext";
+import { CartProvider, useCart } from "../contexts/CartContext";
 import Cart from "./components/Perfumes/Cart";
 
 function AppContent() {

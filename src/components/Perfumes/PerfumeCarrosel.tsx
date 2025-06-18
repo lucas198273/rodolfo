@@ -3,7 +3,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useCart } from "../contexts/CartContext"; // Importar o contexto do carrinho
+import { useCart } from "../../../contexts/CartContext"; // Importar o contexto do carrinho
 
 interface Perfume {
   id: string;

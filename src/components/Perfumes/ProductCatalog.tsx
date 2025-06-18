@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useCart } from "../contexts/CartContext";
+import { useCart } from "../../../contexts/CartContext";
 
 interface Perfume {
   id: string;
@@ -46,7 +46,7 @@ const ProductCatalog: React.FC = () => {
       price: 299.9,
       imageUrl: "/assets/img1.jpeg",
       description: "Mistério e frescor em uma fragrância única.",
-      notes: ["Lavanda s", "Cítricos", "Musgo", "Vetiver"],
+      notes: ["Lavanda", "Cítricos", "Musgo", "Vetiver"],
       available: true,
     },
     {
@@ -60,22 +60,26 @@ const ProductCatalog: React.FC = () => {
     },
   ];
 
-  const handleWhatsApp = (perfume: Perfume) => {
+  const handleWhatsApp = () => {
     const message = encodeURIComponent(
       `Olá! Quero comprar os seguintes perfumes: ${items
-        .map(item => `${item.name} (R$${item.price.toFixed(2)} x ${item.quantity})`)
-        .join(", ")}. Total: R$${items.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}.`
+        .map((item) => `${item.name} (R$${item.price.toFixed(2)} x ${item.quantity})`)
+        .join(", ")}. Total: R$${items
+        .reduce((sum, item) => sum + item.price * item.quantity, 0)
+        .toFixed(2)}.`
     );
     return `https://wa.me/5531999999999?text=${message}`;
   };
 
   const handleAddToCart = (perfume: Perfume) => {
-    addItem({
-      id: perfume.id,
-      name: perfume.name,
-      price: perfume.price,
-      imageUrl: perfume.imageUrl,
-    });
+    if (perfume.available) {
+      addItem({
+        id: perfume.id,
+        name: perfume.name,
+        price: perfume.price,
+        imageUrl: perfume.imageUrl,
+      });
+    }
   };
 
   return (
@@ -125,7 +129,7 @@ const ProductCatalog: React.FC = () => {
                     disabled={!perfume.available}
                     aria-label={`Ver mais sobre ${perfume.name}`}
                   >
-                    {perfume.available ? "Ver Mais" : "Indisponível"}
+                    Ver Mais
                   </button>
                   <button
                     onClick={() => handleAddToCart(perfume)}
@@ -140,65 +144,79 @@ const ProductCatalog: React.FC = () => {
           ))}
         </div>
 
-       {selectedPerfume && (
-  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" data-aos="zoom-in" role="dialog">
-    <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto shadow-lg border-2 border-blue-900">
-      <button
-        onClick={() => setSelectedPerfume(null)}
-        className="absolute top-4 right-4 text-blue-900 hover:text-blue-700"
-        aria-label="Fechar modal"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
+        {selectedPerfume && (
+          <div
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+            data-aos="zoom-in"
+            role="dialog"
+          >
+            <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto shadow-lg border-2 border-blue-900">
+              <button
+                onClick={() => setSelectedPerfume(null)}
+                className="absolute top-4 right-4 text-blue-900 hover:text-blue-700"
+                aria-label="Fechar modal"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
 
-      <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-blue-900">
-        {selectedPerfume.name}
-      </h3>
-      <img
-        src={selectedPerfume.imageUrl}
-        alt={selectedPerfume.name}
-        className="w-full h-64 object-cover rounded-lg mb-4"
-      />
-      <p className="text-base sm:text-lg mb-4 text-blue-900">
-        {selectedPerfume.description}
-      </p>
+              <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-blue-900">
+                {selectedPerfume.name}
+              </h3>
+              <img
+                src={selectedPerfume.imageUrl}
+                alt={selectedPerfume.name}
+                className="w-full h-64 object-cover rounded-lg mb-4"
+              />
+              <p className="text-base sm:text-lg mb-4 text-blue-900">
+                {selectedPerfume.description}
+              </p>
 
-      <div className="mb-4">
-        <h4 className="font-semibold text-lg sm:text-xl mb-2 text-blue-900">
-          Notas Olfativas
-        </h4>
-        <ul className="list-disc list-inside text-base sm:text-lg text-blue-900">
-          {selectedPerfume.notes.map((note, idx) => (
-            <li key={idx}>{note}</li>
-          ))}
-        </ul>
-      </div>
+              <div className="mb-4">
+                <h4 className="font-semibold text-lg sm:text-xl mb-2 text-blue-900">
+                  Notas Olfativas
+                </h4>
+                <ul className="list-disc list-inside text-base sm:text-lg text-blue-900">
+                  {selectedPerfume.notes.map((note, idx) => (
+                    <li key={idx}>{note}</li>
+                  ))}
+                </ul>
+              </div>
 
-      <p className="font-bold text-lg sm:text-xl mb-4 text-blue-900">
-        R$ {selectedPerfume.price.toFixed(2)}
-      </p>
+              <p className="font-bold text-lg sm:text-xl mb-4 text-blue-900">
+                R$ {selectedPerfume.price.toFixed(2)}
+              </p>
 
-      <div className="flex flex-col gap-2">
-        <button
-          onClick={() => handleAddToCart(selectedPerfume)}
-          className="w-full px-4 py-3 text-white rounded-lg text-center transition-colors bg-blue-900 hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
-          disabled={!selectedPerfume.available}
-        >
-          Adicionar ao Carrinho
-        </button>
-        <button
-          onClick={() => window.open(handleWhatsApp(selectedPerfume), "_blank")}
-          className="w-full px-4 py-3 text-white rounded-lg text-center transition-colors bg-green-700 hover:bg-green-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
-          disabled={!selectedPerfume.available}
-        >
-          Comprar via WhatsApp
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => handleAddToCart(selectedPerfume)}
+                  className="w-full px-4 py-3 text-white rounded-lg text-center transition-colors bg-blue-900 hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  disabled={!selectedPerfume.available}
+                >
+                  Adicionar ao Carrinho
+                </button>
+                <button
+                  onClick={() => window.open(handleWhatsApp(), "_blank")}
+                  className="w-full px-4 py-3 text-white rounded-lg text-center transition-colors bg-green-700 hover:bg-green-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  disabled={!selectedPerfume.available}
+                >
+                  Comprar via WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
