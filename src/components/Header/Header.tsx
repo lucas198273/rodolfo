@@ -35,7 +35,7 @@ export default function Header({ onCartClick, cartItemCount }: HeaderProps) {
           <Link to="/">
             <img
               src="/assets/logo.jpeg"
-              alt="Império dos Aromas"
+              alt="Império dos Aromas "
               className="h-29 sm:h-25 object-contain"
               loading="eager"
             />

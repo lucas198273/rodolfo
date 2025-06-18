@@ -46,7 +46,7 @@ const ProductCatalog: React.FC = () => {
       price: 299.9,
       imageUrl: "/assets/img1.jpeg",
       description: "Mistério e frescor em uma fragrância única.",
-      notes: ["Lavanda", "Cítricos", "Musgo", "Vetiver"],
+      notes: ["Lavanda s", "Cítricos", "Musgo", "Vetiver"],
       available: true,
     },
     {
