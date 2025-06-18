@@ -3,6 +3,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useCart } from "../contexts/CartContext"; // Importar o contexto do carrinho
 
 interface Perfume {
   id: string;
@@ -11,7 +12,7 @@ interface Perfume {
   imageUrl: string;
   description: string;
   notes: string[];
-  inStock: boolean; // novo campo
+  inStock: boolean;
 }
 
 export default function PerfumeCarrousel() {
@@ -23,7 +24,9 @@ export default function PerfumeCarrousel() {
     loop: true,
     align: "center",
   });
+
   const [selectedPerfume, setSelectedPerfume] = useState<Perfume | null>(null);
+  const { addItem } = useCart(); // Hook para acessar a função de adicionar ao carrinho
 
   const perfumes: Perfume[] = [
     {
@@ -40,7 +43,7 @@ export default function PerfumeCarrousel() {
       id: "p2",
       name: "Noite de Verão",
       price: 249.5,
-      imageUrl:"/assets/img1.jpeg",
+      imageUrl: "/assets/img1.jpeg",
       description:
         "A vibrant and warm scent capturing the essence of a summer night, with citrus and woody undertones.",
       notes: ["Bergamot", "Cedarwood", "Amber", "Musk"],
@@ -60,7 +63,7 @@ export default function PerfumeCarrousel() {
       id: "p4",
       name: "Brisa do Mar",
       price: 229.9,
-      imageUrl:"/assets/img1.jpeg",
+      imageUrl: "/assets/img1.jpeg",
       description:
         "A fresh and aquatic scent reminiscent of ocean breezes, with a touch of tropical fruits.",
       notes: ["Sea Salt", "Mango", "Coconut", "Driftwood"],
@@ -84,6 +87,15 @@ export default function PerfumeCarrousel() {
       `Olá! Tenho interesse no perfume "${perfume.name}" por R$${perfume.price.toFixed(2)}.`
     );
     return `https://wa.me/${phoneNumber}?text=${mensagem}`;
+  };
+
+  const handleAddToCart = (perfume: Perfume) => {
+    addItem({
+      id: perfume.id,
+      name: perfume.name,
+      price: perfume.price,
+      imageUrl: perfume.imageUrl,
+    });
   };
 
   return (
@@ -113,8 +125,8 @@ export default function PerfumeCarrousel() {
                   data-aos="fade-up"
                   data-aos-delay={index * 100}
                 >
-                  <div className="group bg-white/95 rounded-3xl overflow-hidden shadow-2xl h-[500px] sm:h-[540px] flex flex-col transition-all duration-300 hover:shadow-yellow-400/40 border border-yellow-300">
-                    <div className="relative h-64 sm:h-72 overflow-hidden">
+                  <div className="group bg-white/95 rounded-3xl overflow-hidden shadow-2xl h-[420px] sm:h-[500px] md:h-[540px] flex flex-col transition-all duration-300 hover:shadow-yellow-400/40 border border-yellow-300">
+                    <div className="relative h-52 sm:h-64 md:h-72 overflow-hidden">
                       <img
                         src={perfume.imageUrl}
                         alt={perfume.name}
@@ -122,12 +134,12 @@ export default function PerfumeCarrousel() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
-                    <div className="flex-1 p-6 flex flex-col justify-between text-center">
+                    <div className="flex-1 p-4 sm:p-6 flex flex-col justify-between text-center">
                       <div>
-                        <p className="font-semibold text-lg sm:text-xl text-blue-900">
+                        <p className="font-semibold text-base sm:text-lg text-blue-900">
                           {perfume.name}
                         </p>
-                        <p className="font-bold text-base sm:text-lg text-yellow-600">
+                        <p className="font-bold text-sm sm:text-base text-yellow-600">
                           R$ {perfume.price.toFixed(2)}
                         </p>
                         <p
@@ -145,18 +157,28 @@ export default function PerfumeCarrousel() {
                         >
                           Ver Mais
                         </button>
-                        <a
-                          href={handleWhatsApp(perfume)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`w-full px-4 py-2 text-sm font-semibold rounded-lg text-center ${
-                            perfume.inStock
-                              ? "bg-blue-900 text-white hover:bg-blue-800"
-                              : "bg-gray-400 text-white cursor-not-allowed pointer-events-none"
-                          }`}
+                        <button
+                          onClick={() => handleAddToCart(perfume)}
+                          className="w-full px-4 py-2 text-sm font-semibold rounded-lg text-center bg-blue-900 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                          disabled={!perfume.inStock}
                         >
-                          Comprar via WhatsApp
-                        </a>
+                          Adicionar ao Carrinho
+                        </button>
+                        {perfume.inStock ? (
+                          <button
+                            onClick={() => window.open(handleWhatsApp(perfume), "_blank")}
+                            className="w-full px-4 py-2 text-sm font-semibold rounded-lg text-center bg-green-700 text-white hover:bg-green-800"
+                          >
+                            Comprar via WhatsApp
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => window.open(handleWhatsApp(perfume), "_blank")}
+                            className="w-full px-4 py-2 text-sm font-semibold rounded-lg text-center bg-green-700 text-blue-900 hover:bg-yellow-300"
+                          >
+                            Encomendar via WhatsApp
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -165,6 +187,7 @@ export default function PerfumeCarrousel() {
             </div>
           </div>
 
+          {/* Botões de navegação */}
           <button
             onClick={() => emblaApi?.scrollPrev()}
             className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 p-3 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
@@ -182,12 +205,13 @@ export default function PerfumeCarrousel() {
         </div>
       </div>
 
+      {/* Modal */}
       {selectedPerfume && (
         <div
           className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
           role="dialog"
         >
-          <div className="relative w-full max-w-md sm:max-w-xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl border-2 border-yellow-400 shadow-2xl">
+          <div className="relative w-full max-w-sm sm:max-w-md md:max-w-xl max-h-[85vh] overflow-y-auto bg-white rounded-2xl border-2 border-yellow-400 shadow-2xl">
             <button
               onClick={() => setSelectedPerfume(null)}
               className="absolute top-4 right-4 text-blue-900 hover:text-red-500"
@@ -195,18 +219,18 @@ export default function PerfumeCarrousel() {
             >
               <X size={24} />
             </button>
-            <div className="p-6 sm:p-8 text-blue-900">
-              <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-blue-900">
+            <div className="p-5 sm:p-6 md:p-8 text-blue-900">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4">
                 {selectedPerfume.name}
               </h3>
               <img
                 src={selectedPerfume.imageUrl}
                 alt={selectedPerfume.name}
-                className="w-full h-64 object-cover rounded-xl mb-4 border border-yellow-300"
+                className="w-full h-56 sm:h-64 object-cover rounded-xl mb-4 border border-yellow-300"
               />
               <p className="text-sm sm:text-base mb-4">{selectedPerfume.description}</p>
               <div className="mb-4">
-                <h4 className="font-semibold text-base sm:text-lg mb-1">
+                <h4 className="font-semibold text-sm sm:text-base md:text-lg mb-1">
                   Notas Olfativas:
                 </h4>
                 <ul className="list-disc list-inside text-sm sm:text-base">
@@ -223,20 +247,34 @@ export default function PerfumeCarrousel() {
                   selectedPerfume.inStock ? "text-green-600" : "text-red-500"
                 }`}
               >
-                {selectedPerfume.inStock ? "Disponível em estoque" : "Não disponível"}
+                {selectedPerfume.inStock
+                  ? "Disponível em estoque"
+                  : "Não disponível"}
               </p>
-              <a
-                href={handleWhatsApp(selectedPerfume)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`w-full block px-4 py-3 text-sm rounded-lg text-center ${
-                  selectedPerfume.inStock
-                    ? "bg-blue-900 text-white hover:bg-blue-800"
-                    : "bg-gray-400 text-white cursor-not-allowed pointer-events-none"
-                }`}
-              >
-                Comprar via WhatsApp
-              </a>
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => handleAddToCart(selectedPerfume)}
+                  className="w-full px-4 py-3 text-sm rounded-lg text-center bg-blue-900 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  disabled={!selectedPerfume.inStock}
+                >
+                  Adicionar ao Carrinho
+                </button>
+                {selectedPerfume.inStock ? (
+                  <button
+                    onClick={() => window.open(handleWhatsApp(selectedPerfume), "_blank")}
+                    className="w-full px-4 py-3 text-sm rounded-lg text-center bg-green-700 text-white hover:bg-green-800"
+                  >
+                    Comprar via WhatsApp
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => window.open(handleWhatsApp(selectedPerfume), "_blank")}
+                    className="w-full px-4 py-3 text-sm rounded-lg text-center bg-green-700 text-blue-900 hover:bg-yellow-300"
+                  >
+                    Encomendar via WhatsApp
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
