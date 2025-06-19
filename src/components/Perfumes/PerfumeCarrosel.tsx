@@ -33,7 +33,7 @@ export default function PerfumeCarrousel() {
       id: "p1",
       name: "Flor de Lis",
       price: 199.9,
-      imageUrl: "/assets/img1.jpeg",
+      imageUrl: "/assets/masculinos/070-1.webp",
       description:
         "A delicate floral fragrance inspired by the elegance of the iris flower, evoking sophistication and grace.",
       notes: ["Iris", "Jasmine", "Vanilla", "Sandalwood"],
@@ -43,7 +43,7 @@ export default function PerfumeCarrousel() {
       id: "p2",
       name: "Noite de Verão",
       price: 249.5,
-      imageUrl: "/assets/img1.jpeg",
+      imageUrl: "/assets/masculinos/087-2.webp",
       description:
         "A vibrant and warm scent capturing the essence of a summer night, with citrus and woody undertones.",
       notes: ["Bergamot", "Cedarwood", "Amber", "Musk"],
@@ -53,32 +53,23 @@ export default function PerfumeCarrousel() {
       id: "p3",
       name: "Étoile d’Or",
       price: 299.0,
-      imageUrl: "/assets/img1.jpeg",
+      imageUrl: "/assets/masculinos/136-1.webp",
+      description:
+        "A luxurious fragrance with sparkling top notes and a rich, golden heart, perfect for evening wear.",
+      notes: ["Champagne", "Rose", "Oud", "Patchouli"],
+      inStock: false,
+    },{
+      id: "p4",
+      name: "Étoile d’Or",
+      price: 299.0,
+      imageUrl: "/assets/masculinos/387-1.webp",
       description:
         "A luxurious fragrance with sparkling top notes and a rich, golden heart, perfect for evening wear.",
       notes: ["Champagne", "Rose", "Oud", "Patchouli"],
       inStock: false,
     },
-    {
-      id: "p4",
-      name: "Brisa do Mar",
-      price: 229.9,
-      imageUrl: "/assets/img1.jpeg",
-      description:
-        "A fresh and aquatic scent reminiscent of ocean breezes, with a touch of tropical fruits.",
-      notes: ["Sea Salt", "Mango", "Coconut", "Driftwood"],
-      inStock: true,
-    },
-    {
-      id: "p5",
-      name: "Velvet Noir",
-      price: 279.5,
-      imageUrl: "/assets/img1.jpeg",
-      description:
-        "A deep, sensual fragrance with velvety notes, ideal for those who embrace mystery.",
-      notes: ["Black Orchid", "Leather", "Tonka Bean", "Incense"],
-      inStock: false,
-    },
+
+
   ];
 
   const phoneNumber = "5531999999999";
