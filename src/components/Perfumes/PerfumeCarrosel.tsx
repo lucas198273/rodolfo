@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -58,7 +59,8 @@ export default function PerfumeCarrousel() {
         "A luxurious fragrance with sparkling top notes and a rich, golden heart, perfect for evening wear.",
       notes: ["Champagne", "Rose", "Oud", "Patchouli"],
       inStock: false,
-    },{
+    },
+    {
       id: "p4",
       name: "Étoile d’Or",
       price: 299.0,
@@ -68,8 +70,6 @@ export default function PerfumeCarrousel() {
       notes: ["Champagne", "Rose", "Oud", "Patchouli"],
       inStock: false,
     },
-
-
   ];
 
   const phoneNumber = "5531999999999";
@@ -108,16 +108,16 @@ export default function PerfumeCarrousel() {
 
         <div className="relative">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-6 sm:gap-8">
+            <div className="flex gap-4 sm:gap-6">
               {perfumes.map((perfume, index) => (
                 <div
                   key={perfume.id}
-                  className="flex-none w-[90%] sm:w-[50%] md:w-[33%] lg:w-[22%] min-w-[260px] max-w-sm mx-auto"
+                  className="flex-none w-[90%] sm:w-[45%] md:w-[30%] lg:w-[20%] min-w-[220px] max-w-xs mx-auto"
                   data-aos="fade-up"
                   data-aos-delay={index * 100}
                 >
-                  <div className="group bg-white/95 rounded-3xl overflow-hidden shadow-2xl h-[420px] sm:h-[500px] md:h-[540px] flex flex-col transition-all duration-300 hover:shadow-yellow-400/40 border border-yellow-300">
-                    <div className="relative h-52 sm:h-64 md:h-72 overflow-hidden">
+                  <div className="group bg-white/95 rounded-3xl overflow-hidden shadow-lg h-[350px] sm:h-[400px] md:h-[450px] flex flex-col transition-all duration-300 hover:shadow-yellow-400/40 border border-yellow-300">
+                    <div className="relative h-44 sm:h-52 md:h-60 overflow-hidden">
                       <img
                         src={perfume.imageUrl}
                         alt={perfume.name}
@@ -125,32 +125,32 @@ export default function PerfumeCarrousel() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
-                    <div className="flex-1 p-4 sm:p-6 flex flex-col justify-between text-center">
+                    <div className="flex-1 p-3 sm:p-4 flex flex-col justify-between text-center">
                       <div>
-                        <p className="font-semibold text-base sm:text-lg text-blue-900">
+                        <p className="font-semibold text-sm sm:text-base text-blue-900">
                           {perfume.name}
                         </p>
-                        <p className="font-bold text-sm sm:text-base text-yellow-600">
+                        <p className="font-bold text-xs sm:text-sm text-yellow-600">
                           R$ {perfume.price.toFixed(2)}
                         </p>
                         <p
-                          className={`mt-2 text-sm font-medium ${
+                          className={`mt-1 text-xs sm:text-sm ${
                             perfume.inStock ? "text-green-600" : "text-red-500"
                           }`}
                         >
                           {perfume.inStock ? "Disponível em estoque" : "Não disponível"}
                         </p>
                       </div>
-                      <div className="mt-4 flex flex-col gap-3">
+                      <div className="mt-2 flex flex-col gap-2">
                         <button
                           onClick={() => setSelectedPerfume(perfume)}
-                          className="w-full px-4 py-2 text-sm font-semibold rounded-lg transition-colors bg-yellow-400 text-blue-900 hover:bg-yellow-300"
+                          className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg transition-colors bg-yellow-400 text-blue-900 hover:bg-yellow-300"
                         >
                           Ver Mais
                         </button>
                         <button
                           onClick={() => handleAddToCart(perfume)}
-                          className="w-full px-4 py-2 text-sm font-semibold rounded-lg text-center bg-blue-900 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                          className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-center bg-blue-900 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
                           disabled={!perfume.inStock}
                         >
                           Adicionar ao Carrinho
@@ -158,14 +158,14 @@ export default function PerfumeCarrousel() {
                         {perfume.inStock ? (
                           <button
                             onClick={() => window.open(handleWhatsApp(perfume), "_blank")}
-                            className="w-full px-4 py-2 text-sm font-semibold rounded-lg text-center bg-green-700 text-white hover:bg-green-800"
+                            className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-center bg-green-700 text-white hover:bg-green-800"
                           >
                             Comprar via WhatsApp
                           </button>
                         ) : (
                           <button
                             onClick={() => window.open(handleWhatsApp(perfume), "_blank")}
-                            className="w-full px-4 py-2 text-sm font-semibold rounded-lg text-center bg-green-700 text-blue-900 hover:bg-yellow-300"
+                            className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-center bg-green-700 text-blue-900 hover:bg-yellow-300"
                           >
                             Encomendar via WhatsApp
                           </button>
@@ -181,60 +181,60 @@ export default function PerfumeCarrousel() {
           {/* Botões de navegação */}
           <button
             onClick={() => emblaApi?.scrollPrev()}
-            className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 p-3 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
+            className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 p-2 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
             aria-label="Slide anterior"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} />
           </button>
           <button
             onClick={() => emblaApi?.scrollNext()}
-            className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 p-3 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
+            className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 p-2 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
             aria-label="Próximo slide"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Modal Otimizado */}
       {selectedPerfume && (
         <div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-2 sm:p-4"
           role="dialog"
         >
-          <div className="relative w-full max-w-sm sm:max-w-md md:max-w-xl max-h-[85vh] overflow-y-auto bg-white rounded-2xl border-2 border-yellow-400 shadow-2xl">
+          <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg max-h-[85vh] overflow-y-auto bg-white rounded-xl border-2 border-yellow-400 shadow-xl">
             <button
               onClick={() => setSelectedPerfume(null)}
-              className="absolute top-4 right-4 text-blue-900 hover:text-red-500"
+              className="absolute top-2 right-2 text-blue-900 hover:text-red-500"
               aria-label="Fechar modal"
             >
-              <X size={24} />
+              <X size={20} />
             </button>
-            <div className="p-5 sm:p-6 md:p-8 text-blue-900">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4">
+            <div className="p-4 sm:p-5 md:p-6 text-blue-900">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">
                 {selectedPerfume.name}
               </h3>
               <img
                 src={selectedPerfume.imageUrl}
                 alt={selectedPerfume.name}
-                className="w-full h-56 sm:h-64 object-cover rounded-xl mb-4 border border-yellow-300"
+                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg mb-2 border border-yellow-300"
               />
-              <p className="text-sm sm:text-base mb-4">{selectedPerfume.description}</p>
-              <div className="mb-4">
-                <h4 className="font-semibold text-sm sm:text-base md:text-lg mb-1">
+              <p className="text-xs sm:text-sm mb-2">{selectedPerfume.description}</p>
+              <div className="mb-2">
+                <h4 className="font-semibold text-xs sm:text-sm md:text-base mb-1">
                   Notas Olfativas:
                 </h4>
-                <ul className="list-disc list-inside text-sm sm:text-base">
+                <ul className="list-disc list-inside text-xs sm:text-sm">
                   {selectedPerfume.notes.map((note, idx) => (
                     <li key={idx}>{note}</li>
                   ))}
                 </ul>
               </div>
-              <p className="font-bold text-lg text-yellow-600 mb-2">
+              <p className="font-bold text-base sm:text-lg text-yellow-600 mb-1">
                 R$ {selectedPerfume.price.toFixed(2)}
               </p>
               <p
-                className={`text-sm font-medium mb-4 ${
+                className={`text-xs sm:text-sm mb-2 ${
                   selectedPerfume.inStock ? "text-green-600" : "text-red-500"
                 }`}
               >
@@ -242,10 +242,10 @@ export default function PerfumeCarrousel() {
                   ? "Disponível em estoque"
                   : "Não disponível"}
               </p>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2">
                 <button
                   onClick={() => handleAddToCart(selectedPerfume)}
-                  className="w-full px-4 py-3 text-sm rounded-lg text-center bg-blue-900 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg text-center bg-blue-900 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
                   disabled={!selectedPerfume.inStock}
                 >
                   Adicionar ao Carrinho
@@ -253,14 +253,14 @@ export default function PerfumeCarrousel() {
                 {selectedPerfume.inStock ? (
                   <button
                     onClick={() => window.open(handleWhatsApp(selectedPerfume), "_blank")}
-                    className="w-full px-4 py-3 text-sm rounded-lg text-center bg-green-700 text-white hover:bg-green-800"
+                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg text-center bg-green-700 text-white hover:bg-green-800"
                   >
                     Comprar via WhatsApp
                   </button>
                 ) : (
                   <button
                     onClick={() => window.open(handleWhatsApp(selectedPerfume), "_blank")}
-                    className="w-full px-4 py-3 text-sm rounded-lg text-center bg-green-700 text-blue-900 hover:bg-yellow-300"
+                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg text-center bg-green-700 text-blue-900 hover:bg-yellow-300"
                   >
                     Encomendar via WhatsApp
                   </button>
