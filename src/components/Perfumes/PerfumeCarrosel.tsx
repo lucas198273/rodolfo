@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useCart } from "../../../contexts/CartContext"; // Importar o contexto do carrinho
+import { toast } from "react-toastify"; // Importar toast
 
 interface Perfume {
   id: string;
@@ -75,16 +76,36 @@ export default function PerfumeCarrousel() {
     const mensagem = encodeURIComponent(
       `Olá! Tenho interesse no perfume "${perfume.name}" por R$${perfume.price.toFixed(2)}.`
     );
-    return `https://wa.me/${phoneNumber}?text=${mensagem}`;
+    const whatsappLink = `https://wa.me/${phoneNumber}?text=${mensagem}`;
+    window.open(whatsappLink, "_blank");
+    toast.info(`Mensagem enviada para o WhatsApp sobre ${perfume.name}!`, {
+      position: "top-right",
+      autoClose: 3000,
+      className: "bg-blue-600 text-white p-4 rounded-lg shadow-lg text-sm font-medium",
+    });
+    return whatsappLink;
   };
 
   const handleAddToCart = (perfume: Perfume) => {
-    addItem({
-      id: perfume.id,
-      name: perfume.name,
-      price: perfume.price,
-      imageUrl: perfume.imageUrl,
-    });
+    if (perfume.inStock) {
+      addItem({
+        id: perfume.id,
+        name: perfume.name,
+        price: perfume.price,
+        imageUrl: perfume.imageUrl,
+      });
+      toast.success(`${perfume.name} adicionado ao carrinho!`, {
+        position: "top-right",
+        autoClose: 3000,
+        className: "bg-green-600 text-white p-4 rounded-lg shadow-lg text-sm font-medium",
+      });
+    } else {
+      toast.error("Este perfume não está disponível no estoque!", {
+        position: "top-right",
+        autoClose: 3000,
+        className: "bg-red-500 text-white p-4 rounded-lg shadow-lg text-sm font-medium",
+      });
+    }
   };
 
   return (
@@ -155,14 +176,14 @@ export default function PerfumeCarrousel() {
                         </button>
                         {perfume.inStock ? (
                           <button
-                            onClick={() => window.open(handleWhatsApp(perfume), "_blank")}
+                            onClick={() => handleWhatsApp(perfume)}
                             className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-center bg-green-700 text-white hover:bg-green-800"
                           >
                             Comprar via WhatsApp
                           </button>
                         ) : (
                           <button
-                            onClick={() => window.open(handleWhatsApp(perfume), "_blank")}
+                            onClick={() => handleWhatsApp(perfume)}
                             className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-center bg-green-700 text-blue-900 hover:bg-blue-300"
                           >
                             Encomendar via WhatsApp
@@ -250,14 +271,14 @@ export default function PerfumeCarrousel() {
                 </button>
                 {selectedPerfume.inStock ? (
                   <button
-                    onClick={() => window.open(handleWhatsApp(selectedPerfume), "_blank")}
+                    onClick={() => handleWhatsApp(selectedPerfume)}
                     className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg text-center bg-green-700 text-white hover:bg-green-800"
                   >
                     Comprar via WhatsApp
                   </button>
                 ) : (
                   <button
-                    onClick={() => window.open(handleWhatsApp(selectedPerfume), "_blank")}
+                    onClick={() => handleWhatsApp(selectedPerfume)}
                     className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg text-center bg-green-700 text-blue-900 hover:bg-blue-300"
                   >
                     Encomendar via WhatsApp

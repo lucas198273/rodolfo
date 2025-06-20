@@ -1,8 +1,8 @@
-
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useCart } from "../../../contexts/CartContext";
+import { toast } from "react-toastify"; // Importar toast
 
 interface Perfume {
   id: string;
@@ -132,7 +132,14 @@ const ProductCatalog: React.FC = () => {
         .reduce((sum, item) => sum + item.price * item.quantity, 0)
         .toFixed(2)}. Interesse especial no "${perfume.name}" por R$${perfume.price.toFixed(2)}.`
     );
-    return `https://wa.me/5531999999999?text=${message}`;
+    const whatsappLink = `https://wa.me/5531999999999?text=${message}`;
+    window.open(whatsappLink, "_blank");
+    toast.info(`Mensagem enviada para o WhatsApp sobre ${perfume.name}!`, {
+      position: "top-right",
+      autoClose: 3000,
+      className: "bg-blue-600 text-white p-4 rounded-lg shadow-lg text-sm font-medium",
+    });
+    return whatsappLink;
   };
 
   const handleAddToCart = (perfume: Perfume) => {
@@ -142,6 +149,17 @@ const ProductCatalog: React.FC = () => {
         name: perfume.name,
         price: perfume.price,
         imageUrl: perfume.imageUrl,
+      });
+      toast.success(`${perfume.name} adicionado ao carrinho!`, {
+        position: "top-right",
+        autoClose: 3000,
+        className: "bg-green-600 text-white p-4 rounded-lg shadow-lg text-sm font-medium",
+      });
+    } else {
+      toast.error("Este perfume não está disponível no estoque!", {
+        position: "top-right",
+        autoClose: 3000,
+        className: "bg-red-500 text-white p-4 rounded-lg shadow-lg text-sm font-medium",
       });
     }
   };
@@ -205,7 +223,7 @@ const ProductCatalog: React.FC = () => {
                   {!perfume.available && (
                     <button
                       onClick={() => window.open(handleWhatsApp(perfume), "_blank")}
-                      className="w-full px-3 py-1.5 rounded-lg text-white font-semibold text-sm sm:text-base text-center bg-green-700  hover:bg-yellow-300"
+                      className="w-full px-3 py-1.5 rounded-lg text-white font-semibold text-sm sm:text-base text-center bg-green-700 hover:bg-yellow-300"
                     >
                       Encomendar via WhatsApp
                     </button>
