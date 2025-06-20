@@ -123,7 +123,7 @@ export default function PerfumeCarrousel() {
     >
       <div className="max-w-7xl mx-auto">
         <h2
-          className="text-4xl sm:text-5xl font-extrabold text-white drop-shadow-lg mb-12 text-center tracking-tight"
+          className="text-4xl sm:text-5xl font-extrabold text-blue-900 drop-shadow-lg mb-12 text-center tracking-tight"
           data-aos="fade-up"
         >
           Perfumes em Destaque

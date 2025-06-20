@@ -13,12 +13,11 @@ import ProductCatalog from "./components/Perfumes/ProductCatalog";
 import ProductInfoSection from "./components/ProductInfoSection/ProductInfoSection";
 import AboutLoja from "./components/AboutLoja/AboutLoja";
 import { CartProvider, useCart } from "../contexts/CartContext";
-import Cart from "./components/Perfumes/Cart";
+import Cart from "./components/Cart/Cart";
 
 function AppContent() {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  // @ts-ignore
-  const { items, addItem, removeItem, updateQuantity, clearCart } = useCart();
+  const { items } = useCart(); // só precisamos do length para o badge
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -47,13 +46,7 @@ function AppContent() {
       </Routes>
       <Footer />
       {isCartOpen && (
-        <Cart
-          items={items}
-          removeItem={removeItem}
-          updateQuantity={updateQuantity}
-          clearCart={clearCart}
-          onClose={() => setIsCartOpen(false)}
-        />
+        <Cart onClose={() => setIsCartOpen(false)} />
       )}
     </div>
   );
