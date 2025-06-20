@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -11,7 +12,7 @@ export default function AboutLoja() {
     <section
       className="min-h-screen pt-32 pb-16 px-4"
       style={{
-        background: "linear-gradient(to bottom, #ffffff, #0a0a1a)",
+        background: "linear-gradient(to bottom, #ffffff, #1e3a8a)",
         color: "#0a0a1a",
       }}
     >
@@ -20,7 +21,7 @@ export default function AboutLoja() {
         <div className="w-full lg:w-1/2 flex justify-center" data-aos="fade-right">
           <img
             src="/assets/fly.png"
-            alt="Lattafa Lail Maleki"
+            alt="Blue Dream 070"
             className="rounded-xl shadow-xl w-full max-w-sm h-auto object-contain border-4 border-blue-600"
           />
         </div>
@@ -28,35 +29,53 @@ export default function AboutLoja() {
         {/* Texto sobre o perfume */}
         <div className="w-full lg:w-1/2" data-aos="fade-left">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight" style={{ color: "#0a0a1a" }}>
-            Lattafa{" "}
+            Brand Collection{" "}
             <span
               className="font-semibold"
               style={{ color: "#3b82f6" /* azul claro para destaque */ }}
             >
-              Lail Maleki
+              Blue Dream 070
             </span>
           </h2>
 
           <p className="text-lg sm:text-xl mb-6" style={{ color: "#0a0a1a" }}>
-            Uma fragrância oriental <strong>unissex</strong> que combina frescor de frutas e cítricos no topo com um coração floral luxuoso — mel, jasmim, gardênia e orquídea — e um fundo quente de âmbar, sândalo, musk e caramelo.
+            Inspirado no cobiçado Bleu de Chanel, o Blue Dream 070 é uma fragrância amadeirada aromática com rastro cativante. Notas de topo como limão, hortelã e pimenta rosa trazem frescor, enquanto gengibre e jasmim formam o coração. A base de sândalo, patchouli e cedro oferece profundidade. Ideal para o homem moderno, com frasco azul profundo.
           </p>
 
           <ul className="list-disc pl-6 text-lg sm:text-xl space-y-2 mb-6" style={{ color: "#0a0a1a" }}>
             <li>
-              <strong style={{ color: "#3b82f6" }}>Topo:</strong> Frutas, especiarias, cítricos
+              <strong style={{ color: "#3b82f6" }}>Topo:</strong> Limão, hortelã, pimenta rosa
             </li>
             <li>
-              <strong style={{ color: "#3b82f6" }}>Coração:</strong> Mel, jasmim, gardênia, orquídea
+              <strong style={{ color: "#3b82f6" }}>Coração:</strong> Gengibre, jasmim
             </li>
             <li>
-              <strong style={{ color: "#3b82f6" }}>Fundo:</strong> Âmbar, musk, caramelo, sândalo
+              <strong style={{ color: "#3b82f6" }}>Fundo:</strong> Sândalo, patchouli, cedro
             </li>
           </ul>
 
           <p className="text-lg sm:text-xl" style={{ color: "#0a0a1a" }}>
-            Ideal para quem busca uma assinatura olfativa marcante: fresco ao primeiro spray, floral no corpo e sofisticado até o final.
+            Perfeito para quem busca uma fragrância que evoque liberdade e sofisticação, com uma evolução energética e envolvente.
           </p>
         </div>
+      </div>
+
+      {/* Botão de compra */}
+      <div className="max-w-6xl mx-auto mt-12 text-center" data-aos="fade-up" data-aos-delay="200">
+        <a
+          href="https://wa.me/5531999999999?text=Olá! Tenho interesse no Blue Dream 070 por R$199.90."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-6 py-3 rounded-lg transition-colors font-semibold"
+          style={{
+            backgroundColor: "#d4af37",
+            color: "#0a0a1a",
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#c8a44c")}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#d4af37")}
+        >
+          Comprar via WhatsApp
+        </a>
       </div>
     </section>
   );

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -22,7 +21,6 @@ export default function PerfumeCarrousel() {
   }, []);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
     align: "center",
   });
 
@@ -108,15 +106,15 @@ export default function PerfumeCarrousel() {
 
         <div className="relative">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-4 sm:gap-6">
+            <div className="flex justify-center gap-6 sm:gap-8">
               {perfumes.map((perfume, index) => (
                 <div
                   key={perfume.id}
-                  className="flex-none w-[90%] sm:w-[45%] md:w-[30%] lg:w-[20%] min-w-[220px] max-w-xs mx-auto"
+                  className="flex-none w-[90%] sm:w-[45%] md:w-[30%] lg:w-[23%] min-w-[220px] max-w-xs mx-auto"
                   data-aos="fade-up"
-                  data-aos-delay={index * 100}
+                  data-aos-delay={index * 50}
                 >
-                  <div className="group bg-white/95 rounded-3xl overflow-hidden shadow-lg h-[350px] sm:h-[400px] md:h-[450px] flex flex-col transition-all duration-300 hover:shadow-yellow-400/40 border border-yellow-300">
+                  <div className="group bg-white/95 rounded-3xl overflow-hidden shadow-lg h-[350px] sm:h-[400px] md:h-[450px] flex flex-col transition-all duration-300 hover:shadow-xl border border-blue-300">
                     <div className="relative h-44 sm:h-52 md:h-60 overflow-hidden">
                       <img
                         src={perfume.imageUrl}
@@ -130,7 +128,7 @@ export default function PerfumeCarrousel() {
                         <p className="font-semibold text-sm sm:text-base text-blue-900">
                           {perfume.name}
                         </p>
-                        <p className="font-bold text-xs sm:text-sm text-yellow-600">
+                        <p className="font-bold text-xs sm:text-sm text-blue-600">
                           R$ {perfume.price.toFixed(2)}
                         </p>
                         <p
@@ -144,13 +142,13 @@ export default function PerfumeCarrousel() {
                       <div className="mt-2 flex flex-col gap-2">
                         <button
                           onClick={() => setSelectedPerfume(perfume)}
-                          className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg transition-colors bg-yellow-400 text-blue-900 hover:bg-yellow-300"
+                          className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg transition-colors bg-blue-300 text-blue-900 hover:bg-blue-200"
                         >
                           Ver Mais
                         </button>
                         <button
                           onClick={() => handleAddToCart(perfume)}
-                          className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-center bg-blue-900 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                          className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-center bg-blue-700 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
                           disabled={!perfume.inStock}
                         >
                           Adicionar ao Carrinho
@@ -165,7 +163,7 @@ export default function PerfumeCarrousel() {
                         ) : (
                           <button
                             onClick={() => window.open(handleWhatsApp(perfume), "_blank")}
-                            className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-center bg-green-700 text-blue-900 hover:bg-yellow-300"
+                            className="w-full px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-center bg-green-700 text-blue-900 hover:bg-blue-300"
                           >
                             Encomendar via WhatsApp
                           </button>
@@ -181,14 +179,14 @@ export default function PerfumeCarrousel() {
           {/* Botões de navegação */}
           <button
             onClick={() => emblaApi?.scrollPrev()}
-            className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 p-2 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
+            className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 p-3 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
             aria-label="Slide anterior"
           >
             <ChevronLeft size={20} />
           </button>
           <button
             onClick={() => emblaApi?.scrollNext()}
-            className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 p-2 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
+            className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 p-3 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
             aria-label="Próximo slide"
           >
             <ChevronRight size={20} />
@@ -199,10 +197,10 @@ export default function PerfumeCarrousel() {
       {/* Modal Otimizado */}
       {selectedPerfume && (
         <div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-2 sm:p-4"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4"
           role="dialog"
         >
-          <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg max-h-[85vh] overflow-y-auto bg-white rounded-xl border-2 border-yellow-400 shadow-xl">
+          <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg max-h-[85vh] overflow-y-auto bg-white rounded-xl border-2 border-blue-400 shadow-xl">
             <button
               onClick={() => setSelectedPerfume(null)}
               className="absolute top-2 right-2 text-blue-900 hover:text-red-500"
@@ -217,7 +215,7 @@ export default function PerfumeCarrousel() {
               <img
                 src={selectedPerfume.imageUrl}
                 alt={selectedPerfume.name}
-                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg mb-2 border border-yellow-300"
+                className="w-full h-48 sm:h-56 md:h-64 object-contain rounded-lg mb-2 border border-blue-300"
               />
               <p className="text-xs sm:text-sm mb-2">{selectedPerfume.description}</p>
               <div className="mb-2">
@@ -230,7 +228,7 @@ export default function PerfumeCarrousel() {
                   ))}
                 </ul>
               </div>
-              <p className="font-bold text-base sm:text-lg text-yellow-600 mb-1">
+              <p className="font-bold text-base sm:text-lg text-blue-600 mb-1">
                 R$ {selectedPerfume.price.toFixed(2)}
               </p>
               <p
@@ -245,7 +243,7 @@ export default function PerfumeCarrousel() {
               <div className="flex flex-col gap-2">
                 <button
                   onClick={() => handleAddToCart(selectedPerfume)}
-                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg text-center bg-blue-900 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg text-center bg-blue-700 text-white hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
                   disabled={!selectedPerfume.inStock}
                 >
                   Adicionar ao Carrinho
@@ -260,7 +258,7 @@ export default function PerfumeCarrousel() {
                 ) : (
                   <button
                     onClick={() => window.open(handleWhatsApp(selectedPerfume), "_blank")}
-                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg text-center bg-green-700 text-blue-900 hover:bg-yellow-300"
+                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg text-center bg-green-700 text-blue-900 hover:bg-blue-300"
                   >
                     Encomendar via WhatsApp
                   </button>
