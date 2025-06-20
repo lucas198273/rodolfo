@@ -1,4 +1,3 @@
-
 export default function Hero() {
   const handleSubmit = () => {
     const message = `Olá! Gostaria de fazer um pedido de perfume.`;
@@ -28,17 +27,24 @@ export default function Hero() {
           </form>
         </div>
 
-        {/* Imagem */}
+        {/* Imagens */}
         <div className="w-full md:w-1/2 flex justify-center relative">
           {/* Fundo azul suave centralizado */}
-          <div className="absolute w-72 h-72 bg-[#00ced1]/20 blur-2xl rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0"></div>
+          <div className="absolute w-80 h-80 bg-[#00ced1]/20 blur-2xl rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0"></div>
 
-          {/* Imagem do perfume com efeito de luz azul */}
-          <img
-            src="/assets/masculinos/070-bgt.png"
-            alt="Frasco de perfume elegante"
-            className="w-full max-w-sm z-10 relative drop-shadow-[0_0_15px_rgba(0,206,209,0.7)]"
-          />
+          {/* Imagens dos perfumes */}
+          <div className="flex items-center justify-center gap-4 md:gap-6 z-10 relative">
+            <img
+              src="/assets/masculinos/070-bgt.png"
+              alt="Frasco de perfume 1"
+              className="w-40 md:w-48 drop-shadow-[0_0_15px_rgba(0,206,209,0.7)] transition-transform hover:scale-105"
+            />
+            <img
+              src="/assets/masculinos/205-2-bgt.png"
+              alt="Frasco de perfume 2"
+              className="w-40 md:w-48 drop-shadow-[0_0_15px_rgba(0,206,209,0.7)] transition-transform hover:scale-105"
+            />
+          </div>
         </div>
       </div>
     </section>
