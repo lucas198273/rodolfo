@@ -3,8 +3,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useCart } from "../../../contexts/CartContext"; // Importar o contexto do carrinho
-import { toast } from "react-toastify"; // Importar toast
+import { useCart } from "../../../contexts/CartContext";
+import { toast } from "react-toastify";
 
 interface Perfume {
   id: string;
@@ -23,10 +23,13 @@ export default function PerfumeCarrousel() {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "center",
+    loop: false,
+    dragFree: false,
+    slidesToScroll: 1,
   });
 
   const [selectedPerfume, setSelectedPerfume] = useState<Perfume | null>(null);
-  const { addItem } = useCart(); // Hook para acessar a função de adicionar ao carrinho
+  const { addItem } = useCart();
 
   const perfumes: Perfume[] = [
     {
@@ -115,6 +118,7 @@ export default function PerfumeCarrousel() {
       style={{
         backgroundImage: "url(/assets/texture.jpg)",
         backgroundSize: "cover",
+        WebkitOverflowScrolling: "touch",
       }}
     >
       <div className="max-w-7xl mx-auto">
@@ -127,15 +131,15 @@ export default function PerfumeCarrousel() {
 
         <div className="relative">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex justify-center gap-6 sm:gap-8">
+            <div className="flex gap-6 sm:gap-8 px-1 sm:px-0 ml-2 sm:ml-0">
               {perfumes.map((perfume, index) => (
                 <div
                   key={perfume.id}
-                  className="flex-none w-[90%] sm:w-[45%] md:w-[30%] lg:w-[23%] min-w-[220px] max-w-xs mx-auto"
+                  className="flex-none w-[85%] sm:w-[45%] md:w-[30%] lg:w-[23%] min-w-[250px] mx-auto transition-all duration-300"
                   data-aos="fade-up"
                   data-aos-delay={index * 50}
                 >
-                  <div className="group bg-white/95 rounded-3xl overflow-hidden shadow-lg h-[350px] sm:h-[400px] md:h-[450px] flex flex-col transition-all duration-300 hover:shadow-xl border border-blue-300">
+                  <div className="group bg-white/95 rounded-3xl overflow-hidden shadow-lg h-[350px] sm:h-[400px] md:h-[450px] flex flex-col hover:shadow-xl border border-blue-300">
                     <div className="relative h-44 sm:h-52 md:h-60 overflow-hidden">
                       <img
                         src={perfume.imageUrl}
@@ -197,7 +201,6 @@ export default function PerfumeCarrousel() {
             </div>
           </div>
 
-          {/* Botões de navegação */}
           <button
             onClick={() => emblaApi?.scrollPrev()}
             className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 p-3 rounded-full shadow-lg z-10 bg-blue-900 text-white hover:bg-blue-800"
@@ -215,7 +218,6 @@ export default function PerfumeCarrousel() {
         </div>
       </div>
 
-      {/* Modal Otimizado */}
       {selectedPerfume && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4"

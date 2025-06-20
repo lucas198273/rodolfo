@@ -12,7 +12,7 @@ export default function Hero() {
         <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-[#d4af37]">
             Bem-vindo ao <br />
-            <span className="text-[#c8a44c]">Império Dios Aromas</span>
+            <span className="text-[#c8a44c]">Império Dos Aromas</span>
           </h1>
           <p className="text-lg text-[#f2e6c9] mb-6 max-w-md">
             Perfumes com essência de realeza. Encontre o aroma perfeito que combina com sua alma.
