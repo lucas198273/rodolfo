@@ -155,33 +155,55 @@ const ProductCatalog: React.FC = () => {
   available: true,
 }
 ,
-    {
-      id: "p8",
-      name: "Encanto Oriental",
-      price: 189.0,
-      imageUrl: "/assets/masculinos/154-1.webp",
-      description: "Toques orientais para mulheres marcantes.",
-      notes: ["Canela", "Madeira Oud", "Baunilha", "Rosa"],
-      available: true,
-    },
-    {
-      id: "p9",
-      name: "Encanto Oriental",
-      price: 189.0,
-      imageUrl: "/assets/masculinos/205-1.webp",
-      description: "Toques orientais para mulheres marcantes.",
-      notes: ["Canela", "Madeira Oud", "Baunilha", "Rosa"],
-      available: true,
-    },
-    {
-      id: "p10",
-      name: "Encanto Oriental",
-      price: 189.0,
-      imageUrl: "/assets/masculinos/387-1.webp",
-      description: "Toques orientais para mulheres marcantes.",
-      notes: ["Canela", "Madeira Oud", "Baunilha", "Rosa"],
-      available: true,
-    },
+   {
+  id: "p8",
+  name: "Brand Collection 212 VIP Black",
+  price: 199.9,
+  imageUrl: "/assets/masculinos/154-1.webp",
+  description: "Inspirado no icônico 212 VIP Black de Carolina Herrera, o Brand Collection 154 é uma fragrância masculina aromático-fougère intensa, ideal para noites vibrantes e homens confiantes que vivem a noite como se fosse um shot de absinto.",
+  notes: [
+    "Absinto",
+    "Anis",
+    "Erva‑doce",
+    "Lavanda",
+    "Baunilha negra",
+    "Almíscar"
+  ],
+  available: true,
+}
+,
+   {
+  id: "p9",
+  name: "Brand Collection Gaultier Divine",
+  price: 219.9,
+  imageUrl: "/assets/masculinos/205-1.webp",
+  description: "Inspirado no Gaultier Divine de Jean Paul Gaultier, o Brand Collection 205 é uma fragrância feminina floral gourmand marinha que celebra a deusa moderna, com notas que evocam uma combinação de flores brancas cremadas e sal marinho.",
+  notes: [
+    "Merengue",
+    "Sal",
+    "Lírio",
+    "Jasmim",
+    "Ylang‑ylang",
+    "Patchouli",
+    "Almíscar"
+  ],
+  available: true,
+}
+,
+  {
+  id: "p10",
+  name: "Brand Collection 387",
+  price: 86.9,
+  imageUrl: "/assets/masculinos/387-1.webp",
+  description: "Inspirado no The Most Wanted (Azzaro), o Brand Collection 387 é uma fragrância masculina fougère âmbar amadeirada, criada para homens que se jogam e vivem com coragem, exalando poder e sedução.",
+  notes: [
+    "Cardamomo",
+    "Toffee",
+    "Madeira de âmbar"
+  ],
+  available: true,
+}
+,
   ];
 
   const handleWhatsApp = (perfume: Perfume) => {
