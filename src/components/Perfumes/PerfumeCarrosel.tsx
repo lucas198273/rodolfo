@@ -34,7 +34,7 @@ export default function PerfumeCarrousel() {
   const perfumes: Perfume[] = [
     {
       id: "p1",
-      name: "Flor de Lis",
+      name: "070",
       price: 199.9,
       imageUrl: "/assets/masculinos/070-1.webp",
       description:
