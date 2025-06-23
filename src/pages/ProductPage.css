@@ -1,0 +1,10 @@
+/* Estilo personalizado para o carrossel */
+.carousel .slide {
+  background-color: #f9fafb; /* Cor de fundo suave */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.carousel .slide img {
+  border-radius: 8px; /* Bordas arredondadas nas imagens */
+}

@@ -14,6 +14,8 @@ import ProductInfoSection from "./components/ProductInfoSection/ProductInfoSecti
 import AboutLoja from "./components/AboutLoja/AboutLoja";
 import { CartProvider, useCart } from "../contexts/CartContext";
 import Cart from "./components/Cart/Cart";
+import ProductPage from "./pages/ProductPage";
+
 
 function AppContent() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -43,6 +45,7 @@ function AppContent() {
           }
         />
         <Route path="/about" element={<About />} />
+        <Route path="/product/:id" element={<ProductPage />} />
       </Routes>
       <Footer />
       {isCartOpen && (
