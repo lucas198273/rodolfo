@@ -1,9 +1,17 @@
-.carousel .slide {
-  background: transparent;
+/* Botão "anterior" */
+.carousel .control-prev.control-arrow:before {
+  border-right-color: #FFD700 !important; /* dourado */
 }
-.carousel .slider-wrapper {
-  overflow: visible;
+
+/* Botão "próximo" */
+.carousel .control-next.control-arrow:before {
+  border-left-color: #FFD700 !important; /* dourado */
 }
-.carousel .slide img {
-  margin: 0 auto;
+
+/* Contêiner das setas — opcional para fundo */
+.carousel .control-arrow {
+  background: rgba(30, 144, 255, 0.9); /* azul translúcido */
+  width: 40px;
+  height: 40px;
+  top: calc(50% - 20px);
 }
