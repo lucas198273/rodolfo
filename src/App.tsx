@@ -1,5 +1,6 @@
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -16,10 +17,8 @@ import { CartProvider, useCart } from "../contexts/CartContext";
 import Cart from "./components/Cart/Cart";
 import ProductPage from "./pages/ProductPage";
 
-
 function AppContent() {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const { items } = useCart(); // só precisamos do length para o badge
+  const { items, toggleCart } = useCart();
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -27,7 +26,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onCartClick={() => setIsCartOpen(true)} cartItemCount={items.length} />
+      <Header onCartClick={() => toggleCart(true)} cartItemCount={items.length} />
       <Routes>
         <Route
           path="/"
@@ -48,9 +47,7 @@ function AppContent() {
         <Route path="/product/:id" element={<ProductPage />} />
       </Routes>
       <Footer />
-      {isCartOpen && (
-        <Cart onClose={() => setIsCartOpen(false)} />
-      )}
+      <Cart onClose={() => toggleCart(false)} /> {/* Sempre montado, controlado pelo contexto */}
     </div>
   );
 }
