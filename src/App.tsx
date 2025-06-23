@@ -45,9 +45,10 @@ function AppContent() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/products" element={<ProductPage />} /> {/* Nova rota para lista */}
       </Routes>
       <Footer />
-      <Cart onClose={() => toggleCart(false)} /> {/* Sempre montado, controlado pelo contexto */}
+      <Cart onClose={() => toggleCart(false)} />
     </div>
   );
 }

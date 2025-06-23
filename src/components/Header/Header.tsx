@@ -65,6 +65,7 @@ export default function Header({ onCartClick, cartItemCount }: HeaderProps) {
           <nav className="md:hidden fixed top-20 left-0 w-full bg-[#0d1321] shadow-md z-40 px-6 py-4 space-y-4">
             <Link to="/" onClick={() => setMenuOpen(false)} className="block text-white hover:text-[#3fa9f5] transition">Início</Link>
             <Link to="/about" onClick={() => setMenuOpen(false)} className="block text-white hover:text-[#3fa9f5] transition">Sobre</Link>
+            <Link to="/products" onClick={() => setMenuOpen(false)} className="block text-white hover:text-[#3fa9f5] transition">Todos os Produtos</Link>
           </nav>
         )}
       </div>
