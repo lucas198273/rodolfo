@@ -9,19 +9,19 @@ const ProductInfoSection: React.FC = () => {
 
   return (
     <section
-      className="py-16 px-4 bg-white text-[#0a0a1a]"
+      className="py-16 px-4 bg-white text-blue-900"
       data-aos="fade-up"
     >
       <div className="max-w-4xl mx-auto text-center">
         <h2
-          className="text-4xl md:text-5xl font-bold mb-8 text-[#d4af37]"
-          style={{ textShadow: "1px 1px 3px rgba(0, 0, 0, 0.1)" }}
+          className="text-4xl md:text-5xl font-bold mb-8 text-emerald-600 drop-shadow-sm"
+          data-aos="fade-up"
         >
           Sobre Nossos Produtos e Vendas
         </h2>
         <p
-          className="text-lg md:text-xl mb-6 text-[#333] italic"
-          style={{ lineHeight: "1.6" }}
+          className="text-lg md:text-xl mb-6 text-blue-700 italic leading-relaxed"
+          data-aos="fade-up"
         >
           Trabalhamos com perfumes originais e internacionais, trazendo fragrâncias exclusivas
           diretamente para você. Cada produto é autêntico, garantindo qualidade e sofisticação.
@@ -32,15 +32,12 @@ const ProductInfoSection: React.FC = () => {
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          <div
-            className="p-6 rounded-lg shadow-lg border"
-            style={{
-              backgroundColor: "#ffffff",
-              borderColor: "#d4af37",
-            }}
-          >
-            <h3 className="text-2xl font-semibold mb-4 text-[#d4af37]">Meios de Venda</h3>
-            <p className="text-base text-[#333]">
+          {/* Card 1 */}
+          <div className="p-6 rounded-lg shadow-lg border border-emerald-600 bg-white">
+            <h3 className="text-2xl font-semibold mb-4 text-emerald-600">
+              Meios de Venda
+            </h3>
+            <p className="text-base text-blue-800">
               Todas as nossas vendas são finalizadas via WhatsApp. Entre em contato para
               consultar disponibilidade e personalizar sua compra.
             </p>
@@ -48,31 +45,18 @@ const ProductInfoSection: React.FC = () => {
               href="https://wa.me/5531999999999"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-block px-6 py-3 rounded-lg transition-colors font-semibold"
-              style={{
-                backgroundColor: "#d4af37",
-                color: "#0a0a1a",
-              }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor = "#c8a44c")
-              }
-              onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor = "#d4af37")
-              }
+              className="mt-4 inline-block px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-600 transition-colors text-white font-semibold"
+              data-aos="fade-up"
+              data-aos-delay="300"
             >
               Fale Conosco
             </a>
           </div>
 
-          <div
-            className="p-6 rounded-lg shadow-lg border"
-            style={{
-              backgroundColor: "#ffffff",
-              borderColor: "#d4af37",
-            }}
-          >
-            <h3 className="text-2xl font-semibold mb-4 text-[#d4af37]">Entrega</h3>
-            <p className="text-base text-[#333]">
+          {/* Card 2 */}
+          <div className="p-6 rounded-lg shadow-lg border border-emerald-600 bg-white">
+            <h3 className="text-2xl font-semibold mb-4 text-emerald-600">Entrega</h3>
+            <p className="text-base text-blue-800">
               Oferecemos entrega grátis em Betim e região em MG. Para demais locais, o frete é
               calculado no momento da compra. Consulte-nos para mais detalhes!
             </p>
@@ -80,7 +64,7 @@ const ProductInfoSection: React.FC = () => {
         </div>
 
         <p
-          className="text-lg md:text-xl font-bold text-[#d4af37]"
+          className="text-lg md:text-xl font-bold text-emerald-600"
           data-aos="fade-up"
           data-aos-delay="400"
         >
