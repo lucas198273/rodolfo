@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useCart } from "../../../contexts/CartContext";
 import CartItemRow from "./CartRow";
@@ -19,14 +18,18 @@ const Cart: React.FC<Props> = ({ onClose }) => {
     }
   };
 
-  if (!isCartOpen) return null; // Não renderiza visualmente, mas permanece montado
+  if (!isCartOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        <header className="flex items-center justify-between p-6 border-b">
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 transition-opacity duration-300">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto transform transition-transform duration-300 scale-100">
+        <header className="flex items-center justify-between p-6 border-b border-blue-900/10">
           <h2 className="text-2xl font-bold text-blue-900">Meu Carrinho</h2>
-          <button onClick={onClose} className="text-blue-600 hover:text-red-800 text-2xl">
+          <button
+            onClick={onClose}
+            className="text-blue-900 hover:text-emerald-500 text-2xl p-2 rounded-full hover:bg-blue-900/5 transition-colors duration-200"
+            aria-label="Fechar carrinho"
+          >
             ✕
           </button>
         </header>
@@ -38,30 +41,34 @@ const Cart: React.FC<Props> = ({ onClose }) => {
         )}
 
         {items.length === 0 ? (
-          <p className="p-6 text-center text-gray-500 text-lg">Seu carrinho está vazio.</p>
+          <p className="p-6 text-center text-blue-900/70 text-lg font-medium">
+            Seu carrinho está vazio.
+          </p>
         ) : (
           <>
-            <div className="p-4">
+            <div className="p-4 space-y-4">
               {items.map((item) => (
                 <CartItemRow key={item.id} item={item} onRemove={removeItem} />
               ))}
             </div>
-            <div className="flex items-center justify-between p-6 border-t bg-gray-50">
-              <span className="font-semibold text-xl">Total:</span>
-              <span className="text-green-600 font-bold text-2xl">R$ {total.toFixed(2)}</span>
+            <div className="flex items-center justify-between p-6 border-t border-blue-900/10 bg-blue-900/5">
+              <span className="font-semibold text-xl text-blue-900">Total:</span>
+              <span className="text-emerald-500 font-bold text-2xl">R$ {total.toFixed(2)}</span>
             </div>
             <div className="flex gap-4 px-6 pb-6">
               <button
                 onClick={clearCart}
-                className="bg-gray-200 px-6 py-2 rounded-lg hover:bg-gray-300 text-gray-800 font-medium disabled:opacity-50 transition-colors"
+                className="flex-1 bg-white border border-blue-900 text-blue-900 px-6 py-3 rounded-lg hover:bg-blue-900 hover:text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
                 disabled={items.length === 0}
+                aria-label="Limpar carrinho"
               >
                 Limpar Carrinho
               </button>
               <button
                 onClick={handleWhatsAppClick}
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 font-medium disabled:opacity-50 transition-colors"
+                className="flex-1 bg-emerald-500 text-white px-6 py-3 rounded-lg hover:bg-emerald-600 font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
                 disabled={items.length === 0}
+                aria-label="Finalizar compra pelo WhatsApp"
               >
                 Finalizar Compra
               </button>

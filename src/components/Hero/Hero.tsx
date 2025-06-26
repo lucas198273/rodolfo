@@ -12,8 +12,8 @@ export default function Hero() {
         {/* Texto à esquerda */}
         <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Bem-vindo ao <br />
-            <span className="text-emerald-400">Império das Camisetas</span>
+            Bem-vindo a <br />
+            <span className="text-emerald-400">Elizio Camisas Estampadas</span>
           </h1>
           <p className="text-lg text-blue-200 mb-6 max-w-md">
             Camisetas estampadas com elegância e qualidade. Escolha sua estampa e peça agora mesmo!
