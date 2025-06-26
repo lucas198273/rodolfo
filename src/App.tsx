@@ -8,7 +8,7 @@ import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import About from "./pages/About";
 import Footer from "./components/Footer/Footer";
-import PerfumeCarrousel from "./components/Perfumes/PerfumeCarrosel";
+import PerfumeCarrousel from "./components/Perfumes/CamisaCarrosel";
 import SocialMediaSection from "./components/SocialMidia/SocialMIdia";
 import ProductCatalog from "./components/Perfumes/ProductCatalog";
 import ProductInfoSection from "./components/ProductInfoSection/ProductInfoSection";

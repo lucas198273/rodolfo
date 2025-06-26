@@ -7,6 +7,9 @@ export interface CartItem {
   price: number;
   imageUrl: string;
   quantity: number;
+  color: string;
+  size: string;
+  material: string;
 }
 
 interface CartState {
@@ -17,7 +20,7 @@ interface CartState {
 }
 
 type CartAction =
-  | { type: "ADD_ITEM"; item: Omit<CartItem, "quantity"> }
+  | { type: "ADD_ITEM"; item: CartItem }
   | { type: "REMOVE_ITEM"; id: string }
   | { type: "INCREMENT_QUANTITY"; id: string }
   | { type: "DECREMENT_QUANTITY"; id: string }
@@ -30,7 +33,7 @@ interface CartContextData {
   total: number;
   error: string | null;
   isCartOpen: boolean;
-  addItem: (item: Omit<CartItem, "quantity">) => void;
+  addItem: (item: CartItem) => void;
   removeItem: (id: string) => void;
   incrementQuantity: (id: string) => void;
   decrementQuantity: (id: string) => void;
@@ -41,7 +44,7 @@ interface CartContextData {
 const CartContext = createContext<CartContextData | undefined>(undefined);
 
 const cartReducer = (state: CartState, action: CartAction): CartState => {
-  console.log("Redutor acionado:", action.type, "Estado atual:", state); // Log para depuração
+  console.log("Redutor acionado:", action.type, "Estado atual:", state);
   switch (action.type) {
     case "ADD_ITEM": {
       const validationError = validateItem(action.item);
@@ -51,12 +54,23 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
         name: DOMPurify.sanitize(action.item.name),
         imageUrl: DOMPurify.sanitize(action.item.imageUrl),
       };
-      const exists = state.items.find((i) => i.id === sanitizedItem.id);
+      const exists = state.items.find(
+        (i) =>
+          i.id === sanitizedItem.id &&
+          i.color === sanitizedItem.color &&
+          i.size === sanitizedItem.size &&
+          i.material === sanitizedItem.material
+      );
       const newItems = exists
         ? state.items.map((i) =>
-            i.id === sanitizedItem.id ? { ...i, quantity: i.quantity + 1 } : i
+            i.id === sanitizedItem.id &&
+            i.color === sanitizedItem.color &&
+            i.size === sanitizedItem.size &&
+            i.material === sanitizedItem.material
+              ? { ...i, quantity: i.quantity + sanitizedItem.quantity }
+              : i
           )
-        : [...state.items, { ...sanitizedItem, quantity: 1 }];
+        : [...state.items, sanitizedItem];
       return { ...state, items: newItems, error: null, total: calculateTotal(newItems) };
     }
     case "REMOVE_ITEM": {
@@ -92,11 +106,15 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   }
 };
 
-const validateItem = (item: Omit<CartItem, "quantity">) => {
+const validateItem = (item: CartItem) => {
   if (!item.id || typeof item.id !== "string") return "ID inválido";
   if (!item.name || typeof item.name !== "string") return "Nome inválido";
   if (typeof item.price !== "number" || item.price < 0) return "Preço inválido";
   if (!item.imageUrl) return "URL de imagem não fornecida";
+  if (!item.color || typeof item.color !== "string") return "Cor inválida";
+  if (!item.size || typeof item.size !== "string") return "Tamanho inválido";
+  if (!item.material || typeof item.material !== "string") return "Material inválido";
+  if (typeof item.quantity !== "number" || item.quantity < 1) return "Quantidade inválida";
   return null;
 };
 
@@ -106,7 +124,7 @@ const calculateTotal = (items: CartItem[]) =>
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0, error: null, isCartOpen: false });
 
-  const addItem = (item: Omit<CartItem, "quantity">) => {
+  const addItem = (item: CartItem) => {
     dispatch({ type: "ADD_ITEM", item });
   };
 
